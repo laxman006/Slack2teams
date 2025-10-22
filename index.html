@@ -654,7 +654,7 @@
         }
         
         // Send feedback to backend
-        const response = await fetch("http://127.0.0.1:8002/feedback", {
+        const response = await fetch(window.location.origin + "/feedback", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -770,7 +770,7 @@
         console.log("[CHAT] Request body:", requestBody);
         
         // Use streaming endpoint for real-time responses
-        const response = await fetch("http://127.0.0.1:8002/chat/stream", {
+        const response = await fetch(window.location.origin + "/chat/stream", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(requestBody),
@@ -884,7 +884,7 @@
       if (currentUser && currentUser.id) {
         // Clear user's chat history on server
         try {
-          await fetch(`http://127.0.0.1:8002/chat/history/${currentUser.id}`, {
+          await fetch(window.location.origin + `/chat/history/${currentUser.id}`, {
             method: "DELETE"
           });
         } catch (error) {
@@ -1045,7 +1045,7 @@
       if (currentUser && currentUser.id) {
         // Clear user's chat history on server
         try {
-          await fetch(`http://127.0.0.1:8002/chat/history/${currentUser.id}`, {
+          await fetch(window.location.origin + `/chat/history/${currentUser.id}`, {
             method: "DELETE"
           });
         } catch (error) {
@@ -1157,7 +1157,7 @@
           code_verifier: codeVerifier
         };
         
-        const response = await fetch('http://localhost:8002/auth/microsoft/callback', {
+        const response = await fetch(window.location.origin + '/auth/microsoft/callback', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -1306,7 +1306,7 @@
     async function loadUserChatHistory(userId) {
       try {
         console.log('[HISTORY] Loading chat history for user:', userId);
-        const response = await fetch(`http://127.0.0.1:8002/chat/history/${userId}`, {
+        const response = await fetch(window.location.origin + `/chat/history/${userId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
