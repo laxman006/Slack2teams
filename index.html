@@ -1168,6 +1168,8 @@
         if (response.ok) {
           const data = await response.json();
           
+          console.log('[AUTH] OAuth callback response:', data);
+          
           // Clear code verifier from session storage
           sessionStorage.removeItem('code_verifier');
           
@@ -1179,7 +1181,11 @@
             refresh_token: data.refresh_token
           };
           
+          console.log('[AUTH] User object created:', user);
+          console.log('[AUTH] User ID:', user.id);
+          
           localStorage.setItem('user', JSON.stringify(user));
+          console.log('[AUTH] User saved to localStorage');
           
           // Clear URL parameters
           window.history.replaceState({}, document.title, window.location.pathname);
@@ -1223,7 +1229,11 @@
       // Check if user is logged in (only if no OAuth callback)
       const user = JSON.parse(localStorage.getItem('user') || 'null');
       
+      console.log('[INIT] Checking user from localStorage:', user);
+      console.log('[INIT] User ID:', user ? user.id : 'No user');
+      
       if (!user || !user.access_token) {
+        console.log('[INIT] No user found, redirecting to login');
         window.location.href = "login.html";
         return;
       }
@@ -1231,9 +1241,11 @@
       // Verify token is still valid
       showLoadingIndicator("Loading user data...");
       verifyToken(user.access_token).then(isValid => {
+        console.log('[INIT] Token valid:', isValid);
         if (isValid) {
           currentUser = user;
           updateUserInfo(user);
+          console.log('[INIT] Loading chat history for user:', user.id);
           // Always load history, even if it fails
           loadUserChatHistory(user.id).catch(error => {
             console.error('[ERROR] Failed to load history, but continuing:', error);
@@ -1251,6 +1263,7 @@
         // Still try to use the app with cached user
         currentUser = user;
         updateUserInfo(user);
+        console.log('[INIT] Using cached user, loading history for:', user.id);
         loadUserChatHistory(user.id).catch(err => console.error('[ERROR] History load failed:', err));
       });
     }
