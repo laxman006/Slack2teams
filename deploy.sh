@@ -47,9 +47,9 @@ if [ ! -f .env ]; then
 OPENAI_API_KEY=your_openai_api_key_here
 
 # Microsoft OAuth Configuration
-MICROSOFT_CLIENT_ID=bbcae20e-887b-466f-9888-3301e2a18a5c
-MICROSOFT_CLIENT_SECRET=n328Q~4g4DzLumb5eXMReX3ZAnm-tRUSz0Riscb5
-MICROSOFT_TENANT=c9b18954-8964-4212-8168-f54fa673490b
+MICROSOFT_CLIENT_ID=63bd4522-368b-4bd7-a84d-9c7f205cd2a6
+MICROSOFT_CLIENT_SECRET=g-C8Q~ZCcJmuHOt~wEJinGVfiZGYd9gzEy6Wfb5Y
+MICROSOFT_TENANT=common
 
 # Langfuse configuration for observability
 LANGFUSE_PUBLIC_KEY=your_langfuse_public_key_here
